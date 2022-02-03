@@ -82,8 +82,8 @@ module.exports = {
         if(null !== id){
             pool.getConnection(function(error, connect){
                 if(error) throw error;
-                connect.query("update tutorials set ? where id = ?;", newData , id,
-                function(error,result){
+                connect.query("update tutorials set ? where id = ?;", [newData , id],
+                function(error, result){
                     if(error) throw error;
                     res.send({
                         success : true,
