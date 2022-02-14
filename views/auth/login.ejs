@@ -7,6 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="Neon Admin Panel" />
 	<meta name="author" content="" />
+	<% 
+		let baseUrl = req.app.locals.baseUrl;
+	%>
 
 	<link rel="icon" href="neon/assets/images/favicon.ico">
 
@@ -75,7 +78,7 @@ var baseurl = '';
 				<p>Enter <strong>demo</strong>/<strong>demo</strong> as login and password.</p>
 			</div>
 			
-			<form method="post" role="form" id="form_login">
+			<form method="post" role="form" action="<%= "/dologin" %> " >
 				
 				<div class="form-group">
 					

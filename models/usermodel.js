@@ -19,9 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     email_verified_at: DataTypes.DATE,
     password: DataTypes.STRING,
-    remember_token: DataTypes.STRING,
-    created_at: DataTypes.DATE,
-    updated_at: DataTypes.DATE
+    remember_token: DataTypes.STRING, 
   }, {
     sequelize,
     modelName: 'User',

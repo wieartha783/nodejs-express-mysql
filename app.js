@@ -4,8 +4,8 @@ var expressLayouts = require('express-ejs-layouts');
 
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var errorhandler = require('errorhandler')
+var logger = require('morgan');  
+const sessions = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -29,6 +29,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//session SETUP
+const oneDay = 1000 * 60 * 60 * 24;
+
+//session middleware
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false
+}));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tutorials', tutorialsRouter);
@@ -38,6 +49,11 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+//setLocalsVariable
+app.locals.baseURL = process.env.BASE_URL + ":" + process.env.APP_PORT; 
+
+
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -45,9 +61,8 @@ app.use(function(err, req, res, next) {
   res.locals.error = process.env.APP_STATUS === 'development' ? err : {};
   // render the error page
   console.log(res.locals.error);
-
   res.status(err.status || 500);
-  res.render('error', {title:"ERROR"});
+  res.render('error', {title:"ERROR", layout:false});
 });
 
 module.exports = app;
