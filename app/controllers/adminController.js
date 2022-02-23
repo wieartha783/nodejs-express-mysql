@@ -8,8 +8,7 @@ const { frontUser } = require('./userController');
 module.exports = {
 
  //this one use the model from sequelize  also with promise
- async getAllUser(req,res){
-    console.log(model.User);
+ async getAllUser(req,res){ 
     let allUser = await model.User.findAll().then(function (usr) {
         // return response.json(usr);
         res.send({
@@ -134,6 +133,84 @@ module.exports = {
       throw err;
     });
 
-  }
+  },
 
+  todolist(req,res){
+    let allUser =  model.Todolist.findAll().then(function (todo) {
+        // return response.json(usr);
+        res.render('todolist/list', 
+          { 
+            title : process.env.TITLE,
+            todo
+          }
+        );
+    })
+    .catch(function (err) {
+      res.send({
+        status: 500,
+        message:  err.message, 
+        layout : false
+      });
+    });
+  },
+
+  ftodo(req,res){
+    res.render("todolist/ftodo",{title : "Form New Todolist"});
+  },
+
+  saveTodo(req,res){
+    let newTodo = {
+      title : req.body.title,
+      description : req.body.description
+    };
+    const todo = model.Todolist.create(newTodo).then((td) => {
+      res.redirect(req.app.locals.baseURL + "/admin/todolist");
+    }).catch((err) => {
+      res.send({
+        status: 500,
+        message:  err.message, 
+        layout : false
+      });
+    });
+  },
+
+  editTodo(req, res){
+    const id = req.query.id;
+    model.Todolist.findOne({ where : {id} }).then((todo) => {
+      res.render("todolist/fedit",{
+        title : "Edit Todolist",
+        todo
+      });
+    }).catch((err)=>{
+      throw err;
+    });
+  },
+
+  updateTodo(req,res){
+    const id = req.body.id;
+    let updatedTodo = {
+      title : req.body.title,
+      description : req.body.description
+    };
+    model.Todolist.update(updatedTodo, {
+        where : {
+          id : id
+        }
+      }).then( todo => {
+        res.redirect(req.app.locals.baseURL + "/admin/todolist");
+      }).catch(err => {throw err;});
+  },
+
+  destroyTodo(req,res){
+    const id = req.query.id;
+    model.Todolist.destroy({
+      where : {
+        id
+      }
+    }).then(()=>{
+      res.redirect(req.app.locals.baseURL + "/admin/todolist");
+    }).catch((err)=>{
+      throw err;
+    }); 
+  }
 }

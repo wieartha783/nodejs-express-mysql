@@ -14,4 +14,11 @@ router.post('/saveUser', userMiddleware.cekLogged, adminController.saveUser);
 router.post('/updateUser', userMiddleware.cekLogged, adminController.updateUser);
 
 
+router.get('/todolist', userMiddleware.cekLogged, adminController.todolist);
+router.get('/ftodo', userMiddleware.cekLogged, adminController.ftodo);
+router.get('/editTodo', userMiddleware.cekLogged, adminController.editTodo);
+router.post('/saveTodo', userMiddleware.cekLogged, adminController.saveTodo);
+router.post('/updateTodo', userMiddleware.cekLogged, adminController.updateTodo);
+router.get('/destroyTodo', userMiddleware.cekLogged, adminController.destroyTodo);
+
 module.exports = router;
