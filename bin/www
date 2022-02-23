@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var http = require('http');
+var url = require('url');
 var debug = require('debug')('nodejsmysql:server');
 var app = require('../app');
 

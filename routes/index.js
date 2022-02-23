@@ -3,9 +3,11 @@ var express = require('express');
 var router = express.Router();
 
 const { authController } = require('../app/controllers');
+const { userMiddleware } = require('../app/middleware');
+
 
 /* GET home page. */
-router.get('/', function(req, res) {
+router.get('/', userMiddleware.cekLogged ,function(req, res) {
   res.render('welcome/welcome', { title : process.env.TITLE});
 });
 

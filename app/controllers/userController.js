@@ -3,8 +3,7 @@ require('dotenv').config();
 const mysql = require('mysql2');
 const bcrypt = require('bcryptjs');
 const config = require('../../configs/db_config');
-const model = require('../../models/index');
-const session = require('express-session');
+const model = require('../../models/index'); 
 
 const pool = mysql.createPool(config);
 
@@ -57,22 +56,27 @@ module.exports = {
   },
 
   //this one use the model from sequelize  also with promise
-  getAllUser(req,res){
+  async getAllUser(req,res){
     console.log(model.User);
-    let allUser = model.User.findAll().then(function (usr) {
-        return response.json(usr);
+    let allUser = await model.User.findAll().then(function (usr) {
+        // return response.json(usr);
+        res.send({
+          success: true,
+          message: 'Data user fecthed succesfully',
+          data: {
+            user: usr
+          },
+          layout : false
+        });
     })
     .catch(function (err) {
-        console.log('Something wrong happened');
+      res.send({
+        success: 500,
+        message:  err.message, 
+        layout : false
+      });
     });
-    res.send({
-      success: true,
-      message: 'Data user fecthed succesfully',
-      data: {
-        user: allUser
-      },
-      layout : false
-    });
+    
   },
 
   signUp(req,res){
@@ -104,6 +108,22 @@ module.exports = {
         'data': {},
       })
     }
+  },
+
+  async frontUser(req,res){
+    let allUser = await model.User.findAll().then(function (usr) {
+      res.render('user/list',
+        {
+          title : "Daftar user yang ada di database",
+          user : usr
+        });
+    })
+    .catch(function (err) {
+      res.send({
+        success: 500,
+        message:  err.message, 
+      });
+    });
   }
 
 };

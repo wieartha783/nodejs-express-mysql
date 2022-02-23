@@ -15,14 +15,14 @@
 
 				<!-- logo -->
 				<div class="logo">
-					<a href="neon/index.html">
-						<img src="neon/assets/images/logo@2x.png" width="120" alt="" />
+					<a href="<%= baseURL %>/neon/index.html">
+						<img src="<%= baseURL %>/neon/assets/images/logo@2x.png" width="120" alt="" />
 					</a>
 				</div>
 
 				<!-- logo collapse icon -->
 				<div class="sidebar-collapse">
-					<a href="neon/#" class="sidebar-collapse-icon"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
+					<a href="<%= baseURL %>/neon/#" class="sidebar-collapse-icon"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
 						<i class="entypo-menu"></i>
 					</a>
 				</div>
@@ -30,7 +30,7 @@
 								
 				<!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
 				<div class="sidebar-mobile-menu visible-xs">
-					<a href="neon/#" class="with-animation"><!-- add class "with-animation" to support animation -->
+					<a href="<%= baseURL %>/neon/#" class="with-animation"><!-- add class "with-animation" to support animation -->
 						<i class="entypo-menu"></i>
 					</a>
 				</div>
@@ -41,8 +41,7 @@
 
 	</div>
 
-	<div class="main-content">
-		<h2>Here starts everything...</h2>
+	<div class="main-content"> 
 		<%- body %> 
 		<br />
 		<!-- lets do some work here... -->
@@ -50,25 +49,39 @@
 		<%- include('partials/footer') %> 
 	</div>
 </div>
-
-
-
-
 	<!-- Bottom scripts (common) -->
-	<script src="neon/assets/js/gsap/TweenMax.min.js"></script>
-	<script src="neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
-	<script src="neon/assets/js/bootstrap.js"></script>
-	<script src="neon/assets/js/joinable.js"></script>
-	<script src="neon/assets/js/resizeable.js"></script>
-	<script src="neon/assets/js/neon-api.js"></script>
+	<script src="<%= baseURL %>/neon/assets/js/gsap/TweenMax.min.js"></script>
+	<script src="<%= baseURL %>/neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script src="<%= baseURL %>/neon/assets/js/bootstrap.js"></script>
+	<script src="<%= baseURL %>/neon/assets/js/joinable.js"></script>
+	<script src="<%= baseURL %>/neon/assets/js/resizeable.js"></script>
+	<script src="<%= baseURL %>/neon/assets/js/neon-api.js"></script>
+
+	
+	<!-- Imported styles on this page -->
+	<link rel="stylesheet" href="<%= baseURL %>/neon/assets/js/datatables/datatables.css">
+	<link rel="stylesheet" href="<%= baseURL %>/neon/assets/js/select2/select2-bootstrap.css">
+	<link rel="stylesheet" href="<%= baseURL %>/neon/assets/js/select2/select2.css">
+
+
+	<!-- Imported scripts on this page -->
+	<script src="<%= baseURL %>/neon/assets/js/datatables/datatables.js"></script>
+	<script src="<%= baseURL %>/neon/assets/js/select2/select2.min.js"></script>
+	<script src="<%= baseURL %>/neon/assets/js/neon-chat.js"></script>
 
 
 	<!-- JavaScripts initializations and stuff -->
-	<script src="neon/assets/js/neon-custom.js"></script>
+	<script src="<%= baseURL %>/neon/assets/js/neon-custom.js"></script>
 
 
 	<!-- Demo Settings -->
-	<script src="neon/assets/js/neon-demo.js"></script>
+	<script src="<%= baseURL %>/neon/assets/js/neon-demo.js"></script>
+
+	<script>
+		$(document).ready( function () {
+			$('#dtable').DataTable();
+		} );
+	</script>
 
 </body>
 </html>

@@ -1,0 +1,48 @@
+<!-- <%= JSON.stringify(user) %>  -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3>List User in Database</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <a href="<%= baseURL %>/admin/fuser">
+                    <button class="btn btn-default btn-md">
+                        <i class="fa fa-plus-o"></i> Tambah
+                    </button>
+                </a>
+                <br/><br/>
+                <table class="table table-bordered datatable" id="dtable">
+                    <thead>
+                        <tr>
+                            <th>Name </th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Created at</th> 
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for( let index = 0; index < user.length; index++ ) { %>
+                            <tr class="odd gradeX">
+                                <td><%= user[index].name %> </td>
+                                <td><%= user[index].username %></td>
+                                <td><%= user[index].email %></td>
+                                <td class="center"><%= user[index].createdAt %></td> 
+                                <td>
+                                    <% if(user[index].id !== 1){ %>
+                                        <a href="<%= baseURL %>/admin/destroyUser?id=<%= user[index].id %>" class="text-danger"> Delete </a>
+                                        <a href="<%= baseURL %>/admin/editUser?id=<%= user[index].id %>" class="text-warning"> Edit </a>
+                                    <% } %> 
+                                </td>
+                            </tr> 
+                        <% } %> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
