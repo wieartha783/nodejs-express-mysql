@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Todolist.init({
     title: DataTypes.STRING,
-    description: DataTypes.TEXT
+    description: DataTypes.TEXT,
+    done: DataTypes.BOOLEAN,
+    deadline: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Todolist',

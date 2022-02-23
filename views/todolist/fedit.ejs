@@ -3,6 +3,7 @@
         <h4>Form Edit TodoList</h4>
     </div>
     <div class="col-md-6">
+        <%= JSON.stringify(todo) %>
         <form action="<%= baseURL %>/admin/updateTodo" method="post">
             <div class="form-group">
                 <label for=""> Title *</label>
@@ -13,6 +14,17 @@
                 <input type="text" name="description" value="<%= todo.description %>"  class="form-control" required>
             </div>
             <input type="hidden" name="id" value="<%= todo.id %>">
+            <div class="form-group">
+                <label for=""> Deadline *</label>
+                <input type="date" name="deadline"  value="<%= moment(todo.deadline).format("YYYY-MM-DD") %>"  class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for=""> Done *</label>
+                <select name="done" class="form-control" id="">
+                    <option value="0" <% if(!todo.done){ %><%= "selected" %><% } %>>Not Yet</option>
+                    <option value="1" <% if(todo.done){ %><%= "selected" %><% } %>>Done</option>
+                </select>
+            </div>
             <button class="btn btn-prymary"><i class="fa fa-save"></i> Save </button>
         </form>
     </div>

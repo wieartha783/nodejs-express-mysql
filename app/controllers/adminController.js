@@ -161,7 +161,9 @@ module.exports = {
   saveTodo(req,res){
     let newTodo = {
       title : req.body.title,
-      description : req.body.description
+      description : req.body.description,
+      deadline : req.body.deadline,
+      done : req.body.done,
     };
     const todo = model.Todolist.create(newTodo).then((td) => {
       res.redirect(req.app.locals.baseURL + "/admin/todolist");
@@ -190,7 +192,9 @@ module.exports = {
     const id = req.body.id;
     let updatedTodo = {
       title : req.body.title,
-      description : req.body.description
+      description : req.body.description,
+      deadline : req.body.deadline,
+      done : req.body.done,
     };
     model.Todolist.update(updatedTodo, {
         where : {
